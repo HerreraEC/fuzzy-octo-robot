@@ -664,10 +664,421 @@ footer {
 #logout-button:hover {
   background-color: rgba(255, 255, 255, 0.3);
 }
-.announcement-banner {
-  background-color: var(--success);
-  color: white;
-  text-align: center;
-  padding: 15px;
-  font-weight: bold;
+
+/* ───────────────────────────────────────────────
+   Announcements header control
+─────────────────────────────────────────────── */
+#user-controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
 }
+
+#announcements-control {
+  display: flex;
+  align-items: center;
+}
+
+#manage-announcements-button {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 0.85rem;
+  transition: background-color 0.2s;
+  position: relative;
+}
+
+#manage-announcements-button:hover {
+  background-color: rgba(255, 255, 255, 0.35);
+}
+
+/* Badge showing count of active announcements */
+.ann-badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--secondary);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  font-size: 0.65rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+/* ───────────────────────────────────────────────
+   Announcements Banner
+─────────────────────────────────────────────── */
+#announcements-banner {
+  margin-bottom: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.announcement-banner-item {
+  background: linear-gradient(135deg, #fff8e1 0%, #fff3cd 100%);
+  border-left: 4px solid var(--warning);
+  border-radius: 6px;
+  padding: 10px 14px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.07);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.announcement-banner-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.announcement-banner-title {
+  font-weight: 700;
+  font-size: 0.9rem;
+  color: var(--warning-dark, #b45309);
+  margin-bottom: 2px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.announcement-banner-title::before {
+  content: "📢";
+  font-size: 0.85rem;
+}
+
+.announcement-banner-msg {
+  font-size: 0.82rem;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.announcement-dismiss {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 0 2px;
+  line-height: 1;
+  flex-shrink: 0;
+  transition: color 0.2s;
+}
+
+.announcement-dismiss:hover {
+  color: var(--text-primary);
+}
+
+/* ───────────────────────────────────────────────
+   Announcements Management Modal
+─────────────────────────────────────────────── */
+.announcements-modal-content {
+  max-width: 640px !important;
+  width: 95% !important;
+  max-height: 90vh;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.announcements-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.announcements-modal-header h3 {
+  color: var(--primary);
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+/* Add button */
+.add-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 20px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  white-space: nowrap;
+}
+
+.add-btn:hover {
+  background: var(--primary-light);
+}
+
+/* Inline form card */
+.announcement-form-card {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 14px;
+  margin-bottom: 4px;
+}
+
+.announcement-form-card h4 {
+  color: var(--primary);
+  font-size: 1rem;
+  margin-bottom: 12px;
+}
+
+.form-row {
+  display: flex;
+  gap: 12px;
+}
+
+.form-row .form-group {
+  flex: 1;
+}
+
+.form-group {
+  margin-bottom: 10px;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.form-group input[type="text"],
+.form-group input[type="date"],
+.form-group textarea {
+  width: 100%;
+  padding: 7px 10px;
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  font-size: 0.85rem;
+  font-family: inherit;
+  color: var(--text-primary);
+  background: var(--surface);
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--primary-light);
+  box-shadow: 0 0 0 3px rgba(83, 75, 174, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 70px;
+}
+
+.required { color: var(--error); }
+.optional { color: var(--text-secondary); font-style: italic; font-size: 0.75rem; }
+
+.form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.cancel-btn {
+  background: var(--border);
+  color: var(--text-primary);
+  border: none;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancel-btn:hover {
+  background: var(--border-focus);
+}
+
+.confirm-btn {
+  background: var(--primary);
+  color: white;
+  border: none;
+  padding: 6px 14px;
+  border-radius: 5px;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirm-btn:hover {
+  background: var(--primary-light);
+}
+
+/* Announcement list items */
+.announcement-list-item {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 12px 14px;
+  margin-bottom: 10px;
+  background: var(--surface);
+  transition: box-shadow 0.2s;
+}
+
+.announcement-list-item:hover {
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
+}
+
+.ann-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+
+.ann-item-title-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.ann-item-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+/* Status badges */
+.ann-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+
+.ann-status.active {
+  background: var(--success-light);
+  color: var(--success);
+}
+
+.ann-status.scheduled {
+  background: var(--info-light);
+  color: var(--info);
+}
+
+.ann-status.expired {
+  background: var(--error-light);
+  color: var(--error);
+}
+
+.ann-item-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+
+.ann-edit-btn {
+  background: var(--info-light);
+  color: var(--info);
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ann-edit-btn:hover {
+  background: var(--info);
+  color: white;
+}
+
+.ann-delete-btn {
+  background: var(--error-light);
+  color: var(--error);
+  border: none;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.ann-delete-btn:hover {
+  background: var(--error);
+  color: white;
+}
+
+.ann-item-message {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+  margin-bottom: 6px;
+}
+
+.ann-item-dates {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ann-item-dates span {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+
+.loading-text {
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  text-align: center;
+  padding: 20px 0;
+}
+
+.ann-empty {
+  text-align: center;
+  padding: 24px 0;
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  border: 1px dashed var(--border);
+  border-radius: 8px;
+}
+
+/* close button for announcements modal */
+.close-announcements-modal {
+  position: absolute;
+  right: 12px;
+  top: 8px;
+  font-size: 18px;
+  cursor: pointer;
+  color: var(--text-secondary);
+  line-height: 1;
+}
+
